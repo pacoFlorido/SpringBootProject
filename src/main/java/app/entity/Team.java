@@ -18,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "team")
 public class Team {
+    //TODO Completar entidades.
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
