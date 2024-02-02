@@ -18,7 +18,6 @@ import java.util.List;
 @Entity
 @Table(name = "team")
 public class Team {
-    //TODO Completar entidades.
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +35,6 @@ public class Team {
     private Double budget;
 
     @JsonManagedReference
-    @OneToMany (mappedBy = "team", cascade = CascadeType.PERSIST)
+    @OneToMany (mappedBy = "team", cascade = CascadeType.DETACH)
     private List<Player> players;
-
 }

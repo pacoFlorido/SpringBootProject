@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <title>Create Player</title>
+</head>
+<body>
+<section class="container mx-300 my-10">
+    <h1>Team Manager System</h1>
+    <hr>
+    <h2 class="mb-4">Creating Player</h2>
+    <form th:action="@{/view/players}" th:object="${player}" method="POST">
+        <section class="d-flex flex-row">
+            <article class="d-flex flex-column mb-4 mr-5" style="width: 50%">
+                <label>Name: </label>
+                <input type="text" id="name" name="alias" placeholder="Write the player's name" th:field="*{name}" required/>
+            </article>
+            <article class="d-flex flex-column mb-4" style="width: 50%">
+                <label>Alias: </label>
+                <input type="text" id="alias" name="alias" placeholder="Write the player's alias" th:field="*{alias}" required/>
+            </article>
+        </section>
+        <section class="d-flex flex-row">
+            <article class="d-flex flex-column mb-4 mr-5" style="width: 50%">
+                <label>Nationality: </label>
+                <input type="text" id="nationality" name="nationality" placeholder="Write the player's nationality" th:field="*{nationality}" required/>
+            </article>
+            <article class="d-flex flex-column mb-4" style="width: 50%">
+                <label>Birthday: </label>
+                <input type="date" id="birthday" name="birthday" th:field="*{birthday}" required/>
+            </article>
+        </section>
+        <article class="d-flex flex-column mb-4">
+            <label>Team: </label>
+            <select th:field="*{team}">
+                <option th:each="team: ${teams}" th:value="${team.name}" th:text="${team.name}">
+            </select>
+        </article>
+        <button type="submit" class="btn btn-info col-2">Create Player</button>
+    </form>
+    <hr>
+    <a th:href = "@{/view/players}">Back to Player List</a>
+</section>
+</body>
+</html>

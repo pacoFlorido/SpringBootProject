@@ -1,5 +1,6 @@
 package app.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-@Table(name = "player_report")
+@Table(name = "trainer")
 public class Trainer {
 
     @Id

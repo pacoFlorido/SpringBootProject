@@ -34,7 +34,11 @@ public class Player {
     private LocalDate birthday;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.DETACH)
     @JoinColumn (name = "team_id")
     private Team team;
+
+    @OneToOne (cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn (name = "player_report_id", unique = true, nullable = false)
+    private PlayerReport playerReport;
 }

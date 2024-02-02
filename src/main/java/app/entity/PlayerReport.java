@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @ToString
 @Setter
@@ -20,13 +22,16 @@ public class PlayerReport {
 
     private int goals;
 
+    private int assists;
+
     private int matches;
 
+    @Column(name = "red_cards")
     private int redCards;
 
+    @Column(name = "yellow_cards")
     private int yellowCards;
 
-    @OneToOne
-    @JoinColumn (name = "player_id", unique = true, nullable = false)
-    private Player player;
+    @Column(name = "last_match")
+    private LocalDate lastMatch;
 }
