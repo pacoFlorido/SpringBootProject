@@ -7,6 +7,7 @@ import app.entity.Team;
 import app.exceptions.TeamManagerException;
 import app.service.PlayerService;
 import app.service.TeamService;
+import app.service.TrainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +20,20 @@ public class TeamManagerController {
     private TeamService teamService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private TrainerService trainerService;
 
     @GetMapping()
     public String showHome(){
         return "index";
     }
     @GetMapping("/teams")
-    public String getList(Model model){
+    public String getTeamList(Model model){
         model.addAttribute("teams", teamService.findAll());
         return "teams/teams";
     }
     @GetMapping("/teams/trainer/{id}")
-    public String seeTrainer(@PathVariable("id") Long idTeam, Model model){
+    public String seeTrainerOfATeam(@PathVariable("id") Long idTeam, Model model){
         model.addAttribute("trainer", teamService.getTrainer(idTeam));
         return "teams/trainer";
     }
@@ -102,5 +105,11 @@ public class TeamManagerController {
             System.out.println(e.getDetailMessage());
         }
         return "redirect:/view/players";
+    }
+
+    @GetMapping("/trainers")
+    public String getTrainers(Model model){
+        model.addAttribute("trainers", trainerService.getAll());
+        return "trainers/trainers";
     }
 }

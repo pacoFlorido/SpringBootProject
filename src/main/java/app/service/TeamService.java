@@ -1,6 +1,7 @@
 package app.service;
 
 import app.dto.TeamDTO;
+import app.dto.TeamJsonDTO;
 import app.entity.Player;
 import app.entity.Team;
 import app.entity.Trainer;
@@ -46,5 +47,8 @@ public class TeamService {
     }
     public Team getByName(String name){
         return repository.findByName(name);
+    }
+    public List<TeamJsonDTO> getAllToJson(){
+        return repository.getAllToJSON();
     }
 }
