@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=?utf-8?>
+    <title>TeamManager - Players</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          crossorigin="anonymous">
+</head>
+<body style="background: url('../../../fondoIndex.jpg') no-repeat center center fixed; background-size: 100% 100%;">
+<div class="container my-2 gap-2" align="center">
+    <h3>Player List</h3>
+    <table style="width:90%" border="2"
+           class = "table table-striped table-responsive-md">
+        <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Alias</th>
+            <th>Nationality</th>
+            <th>Birthday</th>
+            <th>Team</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody style="background: white">
+        <tr th:each="player : ${players}">
+            <td th:text="${player.name}"></td>
+            <td th:text="${player.alias}"></td>
+            <td th:text="${player.nationality}"></td>
+            <td th:text="${player.birthday}"></td>
+            <td th:text="${player.team?.name}"></td>
+            <td>
+                <a th:href="@{/view/players/update/{id}(id=${player.id})}"
+                   class="btn btn-primary" style="color: white">Update</a>
+                <a th:href="@{/view/players/delete/{id}(id=${player.id})}"
+                   class="btn btn-danger" style="color: white">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/view}" class="btn btn-success rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+        </svg>
+        Home
+    </a>
+    <a th:href="@{/view/teams}" class="btn btn-danger rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+        </svg>
+    </a>
+</div>
+</body>
+</html>
