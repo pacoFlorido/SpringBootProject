@@ -1,6 +1,7 @@
 package app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,9 @@ public class Trainer {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    private String user;
+
     @Column (nullable = false)
     private String name;
 
@@ -30,9 +34,7 @@ public class Trainer {
     @Column (nullable = false)
     private String nationality;
 
-    @Column (name = "favourite_strategy")
-    private String favouriteStrategy;
-
+    @JsonIgnore
     @OneToOne
     @JoinColumn (name = "team_id")
     private Team team;

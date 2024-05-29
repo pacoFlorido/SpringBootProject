@@ -20,18 +20,15 @@ public class PlayerReport {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int goals;
+    private int goals = 0;
 
-    private int assists;
+    private int assists = 0;
 
-    private int matches;
+    private int matches = 0;
 
     @Column(name = "red_cards")
-    private int redCards;
+    private int redCards = 0;
 
     @Column(name = "yellow_cards")
-    private int yellowCards;
-
-    @Column(name = "last_match")
-    private LocalDate lastMatch;
+    private int yellowCards = 0;
 }

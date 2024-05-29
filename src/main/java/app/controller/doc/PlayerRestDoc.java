@@ -20,15 +20,6 @@ public interface PlayerRestDoc {
             @ApiResponse(responseCode = "200", description = "Success.", content = { @Content(schema = @Schema(implementation = Player.class))}),
             @ApiResponse(responseCode = "401", description = "Error.", content = @Content)
     })
-    ResponseEntity<List<Player>> getPlayerWithLastMatchBefore(@Parameter(description = "Date Format: yyyy-mm-dd.") LocalDate date);
-    @Operation(
-            summary = "Retrieve all the Players of the database.",
-            description = "Get All the Players of the API. The response is a list of Player objects."
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Success.", content = { @Content(schema = @Schema(implementation = Player.class))}),
-            @ApiResponse(responseCode = "401", description = "Error.", content = @Content)
-    })
     ResponseEntity<List<Player>> getAll();
     @Operation(
             summary = "Retrieve a Player who have the given Id."

@@ -1,6 +1,7 @@
 package app.service;
 
 import app.entity.Player;
+import app.entity.PlayerReport;
 import app.entity.Team;
 import app.entity.Trainer;
 import app.exceptions.ErrorCode;
@@ -24,6 +25,9 @@ public class PlayerService {
         this.teamRepository = teamRepository;
     }
 
+    public Player findByUser(String user){
+        return this.repository.findByUser(user);
+    }
     public Player findById(Long id){
         return repository.findById(id).orElse(null);
     }
@@ -31,6 +35,7 @@ public class PlayerService {
         return repository.findAll();
     }
     public Player create(Player player){
+        player.setPlayerReport(new PlayerReport());
         return repository.save(player);
     }
     public List<Player> createList(List<Player> players){
@@ -53,9 +58,7 @@ public class PlayerService {
     public List<Player> getOrderByGoals(){
         return repository.findTop10ByOrderByPlayerReport_GoalsDesc();
     }
-    public List<Player> getPlayerWithLastMatchBefore(LocalDate date){
-        return repository.findByPlayerReport_LastMatchBefore(date);
-    }
+
     public Player getPlayerWithMoreGoalsOfTeam(Long teamId){
         return repository.findFirstByTeam_IdOrderByPlayerReport_GoalsDesc(teamId);
     }

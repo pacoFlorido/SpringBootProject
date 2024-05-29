@@ -16,7 +16,6 @@ public class TeamJsonDTO {
         this.name = team.getName();
         this.creationDate = team.getCreationDate().toString();
         this.city = team.getCity();
-        this.budget = team.getBudget();
     }
 
 

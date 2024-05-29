@@ -1,5 +1,6 @@
 package app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,17 +25,11 @@ public class Team {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @Column (name = "creation_date", nullable = false)
+    @Column (name = "creation_date")
     private LocalDate creationDate;
 
     private String city;
-
-    private Double budget;
-
-    @JsonManagedReference
-    @OneToMany (mappedBy = "team", cascade = CascadeType.DETACH)
-    private List<Player> players;
 }

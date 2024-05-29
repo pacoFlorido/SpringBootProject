@@ -33,6 +33,12 @@ public class PlayerRestController implements PlayerRestDoc {
     public ResponseEntity<Player> getById(@PathVariable("id") Long id){
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
+
+    @GetMapping("/{user}")
+    public ResponseEntity<Player> getByUsuario(@PathVariable("user") String user){
+        return new ResponseEntity<>(service.findByUser(user), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Player> newPlayer(@RequestBody Player player){
         Player newPlayer = service.create(player);
@@ -54,10 +60,7 @@ public class PlayerRestController implements PlayerRestDoc {
     public ResponseEntity<List<Player>> getOrderByGoals(){
         return new ResponseEntity<>(service.getOrderByGoals(), HttpStatus.OK);
     }
-    @GetMapping("/last-match-before/{date}")
-    public ResponseEntity<List<Player>> getPlayerWithLastMatchBefore(@PathVariable("date") LocalDate date){
-        return new ResponseEntity<>(service.getPlayerWithLastMatchBefore(date), HttpStatus.OK);
-    }
+
     @GetMapping("/with-more-goals/{idTeam}")
     public ResponseEntity<Player> getPlayerWithMoreGoalsOfTeam(@PathVariable("idTeam") Long idTeam){
         return new ResponseEntity<>(service.getPlayerWithMoreGoalsOfTeam(idTeam), HttpStatus.OK);
