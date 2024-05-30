@@ -36,6 +36,17 @@ public class TrainerService {
         return repository.save(trainer);
     }
 
+    public Trainer findByUser(String usuario){
+        return this.repository.findByUser(usuario);
+    }
+
+    public void deleteByUsuario(String usuario){
+        Trainer trainer = this.repository.findByUser(usuario);
+        if (trainer != null){
+            this.repository.delete(trainer);
+        }
+    }
+
     public Trainer setTeam(Long idTeam, Long idTrainer) {
         Trainer trainer = repository.findById(idTrainer).get();
         Team team = teamRepository.findById(idTeam).get();

@@ -41,8 +41,8 @@ public class TrainerRestController {
         return new ResponseEntity<>(service.setTeam(teamId, trainerId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}") // Elimina un entrenador.
-    public void delete(@PathVariable("id") Long idTrainer){
-        service.delete(idTrainer);
+    @DeleteMapping("/delete/{user}")
+    public void deleteByUsuario(@PathVariable("user") String user){
+        this.service.deleteByUsuario(user);
     }
 }

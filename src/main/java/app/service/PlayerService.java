@@ -51,6 +51,13 @@ public class PlayerService {
             repository.delete(player);
         }
     }
+
+    public void deleteByUsuario(String usuario){
+        Player player = this.findByUser(usuario);
+        if (player != null){
+            this.repository.delete(player);
+        }
+    }
     public List<Player> getByTeam(Long idTeam){
         Team team = teamRepository.findById(idTeam).get();
         return repository.findByTeam(team);

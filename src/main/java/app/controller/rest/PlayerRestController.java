@@ -2,6 +2,7 @@ package app.controller.rest;
 
 import app.controller.doc.PlayerRestDoc;
 import app.entity.Player;
+import app.entity.Team;
 import app.entity.Trainer;
 import app.exceptions.TeamManagerException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,18 +26,14 @@ public class PlayerRestController implements PlayerRestDoc {
         this.service = service;
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Player>> getAll(){
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<Player> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
-    }
-
     @GetMapping("/{user}")
     public ResponseEntity<Player> getByUsuario(@PathVariable("user") String user){
         return new ResponseEntity<>(service.findByUser(user), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{user}")
+    public void deleteByUsuario(@PathVariable("user") String user){
+        this.service.deleteByUsuario(user);
     }
 
     @PostMapping
@@ -44,13 +41,20 @@ public class PlayerRestController implements PlayerRestDoc {
         Player newPlayer = service.create(player);
         return new ResponseEntity<>(newPlayer, HttpStatus.OK);
     }
+
+
+
+
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Player>> getAll(){
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
+
     @PostMapping("/addPlayer-list")
     public ResponseEntity<List<Player>> newListOfPlayers(@RequestBody List<Player> players){
         return new ResponseEntity<>(service.createList(players), HttpStatus.OK);
-    }
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable("id") Long idPlayer){
-        service.delete(idPlayer);
     }
     @GetMapping("/player-list/{idTeam}")
     public ResponseEntity<List<Player>> getPlayersByTeam(@PathVariable("idTeam") Long idTeam){

@@ -2,6 +2,7 @@ package app.controller.rest;
 
 import app.dto.TeamDTO;
 import app.entity.Team;
+import app.exceptions.TeamManagerException;
 import app.service.TeamService;
 import app.util.TeamSortBy;
 import com.google.gson.Gson;
@@ -29,6 +30,17 @@ public class TeamRestController {
     @GetMapping("/all")
     public ResponseEntity<List<Team>> getAll(){
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
+
+    @PutMapping("/update/addUser/{user}")
+    public ResponseEntity<Team> updateMembers(@RequestBody Team team, @PathVariable String user){
+        try {
+            return new ResponseEntity<>(this.service.updateMembers(team, user), HttpStatus.OK);
+        } catch (TeamManagerException e) {
+            System.out.println("Error updateando EQUIPO");
+            System.out.println(e.getDetailMessage());
+        }
+        return null;
     }
 
     @GetMapping("/all/paginated")

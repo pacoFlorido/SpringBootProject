@@ -22,14 +22,6 @@ public interface PlayerRestDoc {
     })
     ResponseEntity<List<Player>> getAll();
     @Operation(
-            summary = "Retrieve a Player who have the given Id."
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Success.", content = { @Content(schema = @Schema(implementation = Player.class))}),
-            @ApiResponse(responseCode = "401", description = "Error.", content = @Content)
-    })
-    ResponseEntity<Player> getById(Long id);
-    @Operation(
             summary = "Creates a new Player on the database."
     )
     @ApiResponses({
@@ -45,14 +37,6 @@ public interface PlayerRestDoc {
             @ApiResponse(responseCode = "401", description = "Error.", content = @Content)
     })
     ResponseEntity<List<Player>> newListOfPlayers(List<Player> players);
-    @Operation(
-            summary = "Delete Player by the given Id."
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Success.", content = { @Content(schema = @Schema(implementation = Player.class))}),
-            @ApiResponse(responseCode = "401", description = "Error.", content = @Content)
-    })
-    void delete(Long idPlayer);
     @Operation(
             summary = "Retrieve 10 Players with the most goals."
     )

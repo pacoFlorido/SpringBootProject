@@ -5,7 +5,9 @@ import app.dto.TeamJsonDTO;
 import app.entity.Player;
 import app.entity.Team;
 import app.entity.Trainer;
+import app.exceptions.TeamManagerException;
 import app.repository.TeamRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -17,6 +19,12 @@ import java.util.List;
 public class TeamService {
     private final TeamRepository repository;
 
+    @Autowired
+    private PlayerService playerService;
+
+    @Autowired
+    private TrainerService trainerService;
+
     public TeamService(TeamRepository repository) {
         this.repository = repository;
     }
@@ -27,6 +35,20 @@ public class TeamService {
 
     public Page<Team> findAllOrderByCreationDate(int numPage, int size, String sortBy) {
         return repository.findAll(PageRequest.of(numPage, size, Sort.by(sortBy)));
+    }
+
+    public Team updateMembers(Team team, String user) throws TeamManagerException {
+        Player player = this.playerService.findByUser(user);
+        Trainer trainer = this.trainerService.findByUser(user);
+        if (player != null) {
+            player.setTeam(team);
+            this.playerService.update(player);
+        } else {
+            trainer.setTeam(team);
+            this.trainerService.update(trainer);
+        }
+
+        return team;
     }
 
     public Team create(Team team) {

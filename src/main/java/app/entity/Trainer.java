@@ -35,7 +35,7 @@ public class Trainer {
     private String nationality;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn (name = "team_id")
     private Team team;
 }
