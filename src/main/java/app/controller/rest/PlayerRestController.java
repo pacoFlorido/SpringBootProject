@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import app.service.PlayerService;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -42,32 +44,20 @@ public class PlayerRestController implements PlayerRestDoc {
         return new ResponseEntity<>(newPlayer, HttpStatus.OK);
     }
 
-
-
-
-
-
-    @GetMapping("/all")
-    public ResponseEntity<List<Player>> getAll(){
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    @GetMapping("/get50withMoreGoals")
+    public ResponseEntity<List<Player>> get50WithMoreGoals(){
+        return new ResponseEntity<>(this.service.get50conMasGoles(), HttpStatus.OK);
     }
 
-    @PostMapping("/addPlayer-list")
-    public ResponseEntity<List<Player>> newListOfPlayers(@RequestBody List<Player> players){
-        return new ResponseEntity<>(service.createList(players), HttpStatus.OK);
-    }
     @GetMapping("/player-list/{idTeam}")
     public ResponseEntity<List<Player>> getPlayersByTeam(@PathVariable("idTeam") Long idTeam){
         return new ResponseEntity<>(service.getByTeam(idTeam), HttpStatus.OK);
     }
-    @GetMapping("/top10-players-with-more-goals")
-    public ResponseEntity<List<Player>> getOrderByGoals(){
-        return new ResponseEntity<>(service.getOrderByGoals(), HttpStatus.OK);
-    }
 
-    @GetMapping("/with-more-goals/{idTeam}")
-    public ResponseEntity<Player> getPlayerWithMoreGoalsOfTeam(@PathVariable("idTeam") Long idTeam){
-        return new ResponseEntity<>(service.getPlayerWithMoreGoalsOfTeam(idTeam), HttpStatus.OK);
+    @GetMapping("/player-list/{idTeam}/{orden}")
+    public ResponseEntity<List<Player>> getPlayersByTeamOrderBy(@PathVariable("idTeam") Long idTeam, @PathVariable("orden") String orden){
+        System.out.println(service.getByTeamOrderBy(idTeam, orden));
+        return new ResponseEntity<>(service.getByTeamOrderBy(idTeam, orden), HttpStatus.OK);
     }
     @PutMapping("/update") // Se actualizan todos los atributos.
     public ResponseEntity<Player> update(@RequestBody Player player){
@@ -76,5 +66,25 @@ public class PlayerRestController implements PlayerRestDoc {
         } catch (TeamManagerException e){
             return new ResponseEntity<>(player, HttpStatus.NOT_MODIFIED);
         }
+    }
+
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Player>> getAll(){
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
+    @PostMapping("/addPlayer-list")
+    public ResponseEntity<List<Player>> newListOfPlayers(@RequestBody List<Player> players){
+        return new ResponseEntity<>(service.createList(players), HttpStatus.OK);
+    }
+
+    @GetMapping("/top10-players-with-more-goals")
+    public ResponseEntity<List<Player>> getOrderByGoals(){
+        return new ResponseEntity<>(service.getOrderByGoals(), HttpStatus.OK);
+    }
+    @GetMapping("/with-more-goals/{idTeam}")
+    public ResponseEntity<Player> getPlayerWithMoreGoalsOfTeam(@PathVariable("idTeam") Long idTeam){
+        return new ResponseEntity<>(service.getPlayerWithMoreGoalsOfTeam(idTeam), HttpStatus.OK);
     }
 }

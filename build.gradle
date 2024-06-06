@@ -25,8 +25,11 @@ jar{
 	manifest{
 		attributes "Main-Class": "app.App"
 	}
-//	from { configurations.compile.collect{it.isDirectory() ? it : zipTree(it)}}
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	from { configurations.compileClasspath.collect{it.isDirectory() ? it : zipTree(it)}}
 }
+
+
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

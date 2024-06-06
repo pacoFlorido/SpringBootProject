@@ -21,6 +21,10 @@ public class TrainerService {
         this.teamRepository = teamRepository;
     }
 
+    public List<Trainer> getByTeam(Long idTeam){
+        return this.repository.findByTeam_Id(idTeam);
+    }
+
     public List<Trainer> getAll(){
         return  repository.findAll();
     }

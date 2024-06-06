@@ -8,6 +8,8 @@ import app.exceptions.ErrorCode;
 import app.exceptions.TeamManagerException;
 import app.repository.PlayerReportRepository;
 import app.repository.TeamRepository;
+import app.repository.TrainerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import app.repository.PlayerRepository;
 
@@ -18,6 +20,10 @@ import java.util.List;
 @Service
 public class PlayerService {
     private final PlayerRepository repository;
+
+    @Autowired
+    private TrainerRepository trainerRepository;
+
     private final TeamRepository teamRepository;
 
     public PlayerService(PlayerRepository repository, PlayerReportRepository playerReportRepository, TeamRepository teamRepository) {
@@ -62,6 +68,36 @@ public class PlayerService {
         Team team = teamRepository.findById(idTeam).get();
         return repository.findByTeam(team);
     }
+
+    public List<Player> getByTeamOrderBy(Long idTeam, String orden){
+        Team team = teamRepository.findById(idTeam).get();
+
+        List<Player> players = new ArrayList<>();
+
+        switch (orden) {
+            case "goles":
+                players = repository.findByTeamOrderByPlayerReport_GoalsDesc(team);
+                break;
+            case "asistencias":
+                players = repository.findByTeamOrderByPlayerReport_AssistsDesc(team);
+                break;
+            case "partidos":
+                players = repository.findByTeamOrderByPlayerReport_MatchesDesc(team);
+                break;
+            case "amarillas":
+                players = repository.findByTeamOrderByPlayerReport_YellowCardsDesc(team);
+                break;
+            case "rojas":
+                players = repository.findByTeamOrderByPlayerReport_RedCardsDesc(team);
+                break;
+            default:
+                players = repository.findByTeam(team);
+                break;
+        }
+        return players;
+
+    }
+
     public List<Player> getOrderByGoals(){
         return repository.findTop10ByOrderByPlayerReport_GoalsDesc();
     }
@@ -70,9 +106,20 @@ public class PlayerService {
         return repository.findFirstByTeam_IdOrderByPlayerReport_GoalsDesc(teamId);
     }
     public Player update(Player player) throws TeamManagerException {
-        if (player.getId() == null){
+        if (player.getUser() == null){
             throw new TeamManagerException(ErrorCode.ID_NOT_FOUND, "No existe Player con ese ID.");
         }
-        return repository.save(player);
+
+        Player playerActualizar = this.repository.findByUser(player.getUser());
+        playerActualizar.setPlayerReport(player.getPlayerReport());
+        playerActualizar.setName(player.getName());
+        playerActualizar.setAlias(player.getAlias());
+        playerActualizar.setImage(player.getImage());
+        return this.repository.save(playerActualizar);
+
+    }
+
+    public List<Player> get50conMasGoles() {
+        return this.repository.findTop50ByOrderByPlayerReport_GoalsDesc();
     }
 }

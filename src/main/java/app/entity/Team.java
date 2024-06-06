@@ -32,4 +32,9 @@ public class Team {
     private LocalDate creationDate;
 
     private String city;
+
+    private String code;
+
+    @Column(name = "image")
+    private String image;
 }

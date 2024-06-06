@@ -20,4 +20,6 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @Query("SELECT new app.dto.TeamJsonDTO(t) FROM Team t")
     List<TeamJsonDTO> getAllToJSON();
 
+    Team findByCode(String code);
+
 }

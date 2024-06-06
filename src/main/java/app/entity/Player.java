@@ -37,8 +37,11 @@ public class Player {
     @Column (nullable = false)
     private LocalDate birthday;
 
+    @Column(name = "image")
+    private String image;
+
     @JsonIgnore
-    @ManyToOne (cascade = CascadeType.DETACH)
+    @ManyToOne (cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn (name = "team_id")
     private Team team;
 

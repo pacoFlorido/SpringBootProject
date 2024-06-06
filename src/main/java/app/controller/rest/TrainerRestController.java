@@ -1,5 +1,6 @@
 package app.controller.rest;
 
+import app.entity.Player;
 import app.entity.Team;
 import app.entity.Trainer;
 import app.exceptions.TeamManagerException;
@@ -20,6 +21,27 @@ public class TrainerRestController {
     public TrainerRestController(TrainerService service) {
         this.service = service;
     }
+
+    @GetMapping("/{user}")
+    public ResponseEntity<Trainer> getByUsuario(@PathVariable("user") String user){
+        return new ResponseEntity<>(service.findByUser(user), HttpStatus.OK);
+    }
+
+    @GetMapping("/trainer-list/{idTeam}")
+    public ResponseEntity<List<Trainer>> getTrainersByTeam(@PathVariable("idTeam") Long idTeam){
+        return new ResponseEntity<>(service.getByTeam(idTeam), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{user}")
+    public void deleteByUsuario(@PathVariable("user") String user){
+        this.service.deleteByUsuario(user);
+    }
+
+
+
+
+
+
     @GetMapping("/all") // Muestra todos los Entrenadores.
     public ResponseEntity<List<Trainer>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
@@ -36,13 +58,9 @@ public class TrainerRestController {
             return new ResponseEntity<>(trainer, HttpStatus.NOT_MODIFIED);
         }
     }
+
     @PatchMapping("/set-team/{idTrainer}/{idTeam}") // Asigna un equipo a un entrenador mediante las Id del entrenador y la del equipo.
     public ResponseEntity<Trainer> setTeam(@PathVariable("idTeam") Long teamId, @PathVariable("idTrainer") Long trainerId){
         return new ResponseEntity<>(service.setTeam(teamId, trainerId), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/{user}")
-    public void deleteByUsuario(@PathVariable("user") String user){
-        this.service.deleteByUsuario(user);
     }
 }

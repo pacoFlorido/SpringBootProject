@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="app.AppTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-06T17:16:56" hostname="DESKTOP-QINPCPC" time="1.209">
+  <properties/>
+  <testcase name="contextLoads()" classname="app.AppTests" time="1.209"/>
+  <system-out><![CDATA[19:16:39.690 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [app.AppTests]: AppTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:16:39.936 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration app.App for test class app.AppTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.1)
+
+2024-06-06T19:16:41.102+02:00  INFO 22880 --- [    Test worker] app.AppTests                             : Starting AppTests using Java 17.0.10 with PID 22880 (started by Paco Florido in C:\Users\Paco Florido\OneDrive\Desktop\2ºDAM\ADA\ProyectoSpring)
+2024-06-06T19:16:41.105+02:00  INFO 22880 --- [    Test worker] app.AppTests                             : No active profile set, falling back to 1 default profile: "default"
+2024-06-06T19:16:43.429+02:00  INFO 22880 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-06T19:16:43.643+02:00  INFO 22880 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 185 ms. Found 5 JPA repository interfaces.
+2024-06-06T19:16:44.749+02:00  INFO 22880 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-06T19:16:46.698+02:00  INFO 22880 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70c491b8
+2024-06-06T19:16:46.702+02:00  INFO 22880 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-06-06T19:16:46.806+02:00  INFO 22880 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-06T19:16:46.994+02:00  INFO 22880 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-06-06T19:16:47.144+02:00  INFO 22880 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-06T19:16:47.936+02:00  INFO 22880 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-06T19:16:48.410+02:00  WARN 22880 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-06-06T19:16:50.551+02:00  INFO 22880 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-06T19:16:50.556+02:00  INFO 22880 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-06T19:16:51.514+02:00  INFO 22880 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-06-06T19:16:53.310+02:00  WARN 22880 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-06T19:16:53.360+02:00  INFO 22880 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-06-06T19:16:55.987+02:00  INFO 22880 --- [    Test worker] app.AppTests                             : Started AppTests in 15.547 seconds (process running for 18.137)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,5 +1,6 @@
 package app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,16 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "titlte")
     private String titulo;
+    @Column(name = "description")
     private String descripcion;
+    @Column(name = "date")
     private LocalDateTime fecha;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
 }
